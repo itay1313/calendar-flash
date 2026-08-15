@@ -13,9 +13,16 @@ def block_html(b):
     s, e = h(b["s"]), h(b["e"])
     lane = "lane-itay" if b["owner"] == "itay" else "lane-mori"
     dur = e - s
-    cls = "blk " + b["owner"] + " " + lane + (" tiny" if dur < 1.2 else "")
-    return (f'<div class="{cls}" style="top:{top(s):.1f}px;height:{dur*PX_PER_HOUR:.1f}px">'
-            f'<b>{b["title"]}</b><i dir="ltr">{b["s"]}&#8211;{b["e"]}</i></div>')
+    cls = "blk " + b["owner"] + " " + lane
+    if dur < 0.75:
+        cls += " mini"
+    elif dur < 1.2:
+        cls += " tiny"
+    hgt = max(dur * PX_PER_HOUR, 27.0)   # short meetings still need a legible box
+    tip = f'{b["title"]} · {b["s"]}-{b["e"]}'
+    time_el = "" if dur < 0.75 else f'<i dir="ltr">{b["s"]}&#8211;{b["e"]}</i>'
+    return (f'<div class="{cls}" title="{tip}" style="top:{top(s):.1f}px;height:{hgt:.1f}px">'
+            f'<b>{b["title"]}</b>{time_el}</div>')
 
 
 def free_html(day):
@@ -90,6 +97,8 @@ h1{{font-size:25px;font-weight:800;letter-spacing:-.4px;line-height:1}}
 .blk b{{font-size:9.8px;font-weight:700;display:block}}
 .blk i{{font-size:8.6px;font-style:normal;opacity:.75;font-variant-numeric:tabular-nums;margin-top:1px}}
 .blk.tiny{{padding:2px 4px}}
+.blk.mini{{padding:2px 4px}}
+.blk.mini b{{font-size:7.7px;line-height:1.08;font-weight:700}}
 .blk.tiny b{{font-size:8.6px}}
 .blk.tiny i{{font-size:7.6px}}
 .lane-itay{{right:3px;width:calc(50% - 4px)}}

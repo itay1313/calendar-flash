@@ -31,11 +31,11 @@ BLOCKS = [
     dict(day=2, s="09:00", e="19:00", owner="mori",  title="מורי — משרד"),
 
     # --- Flash meetings (Mori's calendar) ---
-    dict(day=0, s="15:00", e="16:00", owner="meeting", title="דביר / Flash"),
-    dict(day=1, s="15:00", e="16:00", owner="meeting", title="מאיה רובין / Flash"),
-    dict(day=1, s="16:30", e="17:30", owner="meeting", title="אלון פינקלשטיין / Flash"),
-    dict(day=4, s="12:30", e="13:30", owner="meeting", title="לישי כהן / Flash"),
-    dict(day=4, s="16:30", e="17:30", owner="meeting", title="ג'ונתן / Flash"),
+    dict(day=0, s="15:00", e="15:30", owner="meeting", title="דביר / Flash"),
+    dict(day=1, s="15:00", e="15:30", owner="meeting", title="מאיה רובין / Flash"),
+    dict(day=1, s="16:30", e="17:00", owner="meeting", title="אלון פינקלשטיין / Flash"),
+    dict(day=4, s="12:30", e="13:00", owner="meeting", title="לישי כהן / Flash"),
+    dict(day=4, s="16:30", e="17:00", owner="meeting", title="ג'ונתן / Flash"),
 ]
 
 FLEX_DAYS = {
