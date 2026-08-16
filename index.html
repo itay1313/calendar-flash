@@ -260,16 +260,12 @@ var BASE_WEEK_START = '2026-08-16';
 
 var BASE_BUSY = {
   0: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'},
-       {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'},
-       {type:'meeting', start:'15:00', end:'15:30', label:'דביר / Flash'} ],
-  1: [ {type:'mori', start:'09:00', end:'19:00', label:'מורי — משרד'},
-       {type:'meeting', start:'15:00', end:'15:30', label:'מאיה רובין / Flash'},
-       {type:'meeting', start:'16:30', end:'17:00', label:'אלון פינקלשטיין / Flash'} ],
+       {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
+  1: [ {type:'mori', start:'09:00', end:'19:00', label:'מורי — משרד'} ],
   2: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'},
        {type:'mori', start:'09:00', end:'19:00', label:'מורי — משרד'} ],
   3: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'} ],
-  4: [ {type:'meeting', start:'12:30', end:'13:00', label:'לישי כהן / Flash'},
-       {type:'meeting', start:'16:30', end:'17:00', label:"ג'ונתן / Flash"} ],
+  4: [],
   5: [],
   6: []
 };
@@ -280,13 +276,13 @@ var BASE_NOTES = {
   5: 'שישי — שניהם פנויים',
   6: 'שבת — שניהם פנויים'
 };
-// הלוז הקבוע לכל שבוע אחר: ימי א׳-ה׳ כמו יום ראשון (איתי באבן קיסר, מורי בעבודה), ו׳-ש׳ פנויים
+// הלוז הקבוע לכל שבוע אחר: איתי עובד א׳,ג׳,ד׳ עד 16:00; מורי עובדת א׳,ב׳,ג׳; ה׳-ש׳ פנויים
 var RECURRING_BUSY = {
-  0: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
-  1: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
-  2: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
-  3: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
-  4: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
+  0: [ {type:'itay', start:'09:00', end:'16:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
+  1: [ {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
+  2: [ {type:'itay', start:'09:00', end:'16:00', label:'איתי — אבן קיסר'}, {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'} ],
+  3: [ {type:'itay', start:'09:00', end:'16:00', label:'איתי — אבן קיסר'} ],
+  4: [],
   5: [],
   6: []
 };
