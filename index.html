@@ -28,11 +28,12 @@ header{display:flex;align-items:flex-end;justify-content:space-between;border-bo
 .li-free{background:var(--free-bg);border:1.5px dashed var(--free)}
 
 .grid{display:flex;flex:1;gap:5px;min-height:0}
+.days{display:flex;flex:1;gap:5px;min-width:0}
 .axis{width:42px;position:relative;flex:none;padding-top:34px}
 .hr{position:absolute;right:0;font-size:9.5px;color:var(--muted);transform:translateY(-50%);font-variant-numeric:tabular-nums;font-weight:500}
 .day{flex:1;display:flex;flex-direction:column;min-width:0}
 .day.weekend .dhead{background:#f7f8fa}
-.dhead{height:30px;border-radius:7px 7px 0 0;background:#f2f4f8;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-bottom:none}
+.dhead{height:30px;border-radius:7px 7px 0 0;background:#f2f4f8;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-bottom:none;position:relative}
 .dname{font-size:13.5px;font-weight:800}
 .ddate{font-size:10.5px;color:var(--muted);font-weight:500}
 .dhead,.track{flex:none}
@@ -44,7 +45,7 @@ header{display:flex;align-items:flex-end;justify-content:space-between;border-bo
 .free span{font-size:9.5px;font-weight:700;color:var(--free);background:#fff;padding:1px 5px;border-radius:4px;font-variant-numeric:tabular-nums}
 .free.tiny span{font-size:8.5px}
 
-.blk{position:absolute;border-radius:5px;padding:4px 5px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;line-height:1.2}
+.blk{position:absolute;border-radius:5px;padding:4px 5px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;line-height:1.2;cursor:pointer}
 .blk b{font-size:10.6px;font-weight:700;display:block}
 .blk i{font-size:9.2px;font-style:normal;opacity:.75;font-variant-numeric:tabular-nums;margin-top:1px}
 .blk.tiny{padding:2px 4px}
@@ -76,7 +77,7 @@ footer{margin-top:16px;display:flex;justify-content:center;flex-wrap:wrap;gap:26
 .blk:hover,.free:hover{transform:scale(1.035);box-shadow:0 6px 18px rgba(15,23,42,.18);z-index:9}
 @page{size:A4 landscape;margin:0}
 @media print{html,body{background:#fff}.page{margin:0}.ctl{display:none}}
-.shot .ctl{display:none}
+.shot .ctl,.shot #weeknav,.shot .addbtn,.shot .addbtn2{display:none}
 
 /* ---------- shared shell ---------- */
 html,body{min-height:100%}
@@ -87,6 +88,38 @@ body{background:#eef0f4;padding:16px 0 40px;display:block}
 #bar a,#bar button{font:600 12.5px/1 inherit;color:#12151c;background:#fff;border:1px solid #d9dde6;
   border-radius:9px;padding:9px 13px;cursor:pointer;text-decoration:none;transition:.15s;white-space:nowrap}
 #bar a:hover,#bar button:hover{border-color:#12151c;transform:translateY(-1px)}
+
+#weeknav{max-width:1900px;margin:0 auto 14px;padding:0 20px;box-sizing:border-box;display:flex;gap:10px;
+  align-items:center;justify-content:center;direction:rtl;flex-wrap:wrap}
+#weeknav button{font:700 13px/1 inherit;color:var(--ink);background:#fff;border:1px solid #d9dde6;
+  border-radius:9px;padding:8px 13px;cursor:pointer;transition:.15s;white-space:nowrap}
+#weeknav button:hover{border-color:var(--ink);transform:translateY(-1px)}
+#weeknav button#todayWeek{font-weight:600;font-size:11.5px;color:var(--muted);border-style:dashed}
+#weekRangeLabel{font-size:13px;font-weight:800;color:var(--ink);min-width:120px;text-align:center;font-variant-numeric:tabular-nums}
+
+.addbtn{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;transition:.15s}
+.addbtn:hover{border-color:var(--ink);color:var(--ink);background:#f7f8fb}
+.addbtn2{margin-inline-start:8px;width:22px;height:22px;border-radius:50%;flex:none;
+  border:1px solid var(--line);background:#fff;color:var(--muted);font-size:14px;cursor:pointer;transition:.15s}
+.addbtn2:hover{border-color:var(--ink);color:var(--ink)}
+.delbtn{background:transparent;border:none;color:inherit;opacity:.5;font-size:15px;line-height:1;padding:2px 3px;
+  cursor:pointer;transition:.15s}
+.delbtn:hover{opacity:1;color:#b91c1c}
+
+.ov{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.ov[hidden]{display:none}
+.ovbox{background:#fff;border-radius:14px;padding:20px 22px;width:100%;max-width:320px;direction:rtl;box-shadow:0 20px 60px rgba(15,23,42,.3)}
+.ovbox h4{font-size:16px;font-weight:800;margin-bottom:14px}
+.ovbox label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.ovbox select,.ovbox input{width:100%;margin-top:4px;font:600 13px/1.4 inherit;color:var(--ink);
+  border:1px solid var(--line);border-radius:8px;padding:8px 9px;background:#fafbfd}
+.ovrow{display:flex;gap:10px}
+.ovrow label{flex:1}
+.ovbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+.ovbtns button{font:700 12.5px/1 inherit;border-radius:8px;padding:9px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.ovbtns button.primary{background:var(--ink);border-color:var(--ink);color:#fff}
 
 /* ---------- desktop ---------- */
 #shell{width:100%;max-width:1900px;margin:0 auto;padding:0 20px;box-sizing:border-box}
@@ -107,7 +140,7 @@ body{background:#eef0f4;padding:16px 0 40px;display:block}
   border:1px solid transparent;font-size:13.5px}
 .r:last-child{margin-bottom:0}
 .r .t{font-variant-numeric:tabular-nums;font-weight:800;font-size:12.5px;min-width:92px}
-.r .n{font-weight:600}
+.r .n{font-weight:600;flex:1}
 .r.w-itay{background:var(--itay-bg);border-color:var(--itay-br);color:#12325f}
 .r.w-mori{background:var(--mori-bg);border-color:var(--mori-br);color:#3b1d70}
 .r.w-meeting{background:var(--meet-bg);color:#fff}
@@ -122,26 +155,33 @@ body{background:#eef0f4;padding:16px 0 40px;display:block}
   #mob{display:block}
   #bar{max-width:560px}
   #bar .stamp{width:100%;margin:0 0 2px}
+  #weeknav{max-width:560px}
 }
 @media print{
-  body{padding:0;background:#fff}#bar,#mob{display:none}
+  body{padding:0;background:#fff}#bar,#mob,#weeknav{display:none}
   #shell{display:block;padding:0;overflow:visible;max-width:none}
   #wrap{transform:none!important;width:1123px}
   .page{box-shadow:none;border-radius:0;width:1123px;height:794px;padding:22px 26px 18px}
-  .ctl{display:none}
+  .ctl,.addbtn,.addbtn2{display:none}
 }
 </style></head>
 <body>
 <div id="bar">
-  <span class="stamp">שבוע <span dir="ltr">16&#8211;22.8.2026</span> · שעון ישראל</span>
-  <a href="luz-itay-mori.ics" download>הוספה ליומן (ICS)</a>
-  <a href="luz-itay-mori-A4.pdf" download>הורדת PDF</a>
+  <span class="stamp" id="stampText"></span>
+  <a href="luz-itay-mori.ics" download id="icsLink">הוספה ליומן (ICS)</a>
+  <a href="luz-itay-mori-A4.pdf" download id="pdfLink">הורדת PDF</a>
   <button onclick="window.print()">הדפסה</button>
+</div>
+<div id="weeknav">
+  <button id="prevWeek" type="button">שבוע קודם</button>
+  <span id="weekRangeLabel"></span>
+  <button id="nextWeek" type="button">שבוע הבא</button>
+  <button id="todayWeek" type="button">לשבוע המקורי</button>
 </div>
 <div id="shell"><div id="wrap"><div class="page">
 <header>
   <div>
-    <div class="sub">שבוע <span dir="ltr">16&#8211;22</span> באוגוסט 2026 · שעון ישראל (GMT+3)</div>
+    <div class="sub" id="subText"></div>
     <div class="ctl">
       <label><input type="checkbox" checked data-k="itay">איתי</label>
       <label><input type="checkbox" checked data-k="mori">מורי</label>
@@ -150,70 +190,360 @@ body{background:#eef0f4;padding:16px 0 40px;display:block}
     </div>
   </div>
   <div class="legend">
-    <span><i class="li-itay"></i>איתי — אבן קיסר</span>
-    <span><i class="li-mori"></i>מורי — עבודה</span>
+    <span><i class="li-itay"></i>איתי</span>
+    <span><i class="li-mori"></i>מורי</span>
     <span><i class="li-meet"></i>פגישות Flash</span>
     <span><i class="li-free"></i>חלון פנוי לשניהם</span>
   </div>
 </header>
 <div class="grid">
   <div class="axis"><div class="hr" style="top:0.0px">08:00</div><div class="hr" style="top:40.0px">09:00</div><div class="hr" style="top:80.0px">10:00</div><div class="hr" style="top:120.0px">11:00</div><div class="hr" style="top:160.0px">12:00</div><div class="hr" style="top:200.0px">13:00</div><div class="hr" style="top:240.0px">14:00</div><div class="hr" style="top:280.0px">15:00</div><div class="hr" style="top:320.0px">16:00</div><div class="hr" style="top:360.0px">17:00</div><div class="hr" style="top:400.0px">18:00</div><div class="hr" style="top:440.0px">19:00</div><div class="hr" style="top:480.0px">20:00</div><div class="hr" style="top:520.0px">21:00</div><div class="hr" style="top:560.0px">22:00</div><div class="hr" style="top:600.0px">23:00</div></div>
-  <div class="day">
-  <div class="dhead"><span class="dname">ראשון</span><span class="ddate">16.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free tiny" style="top:0.0px;height:40.0px"><span dir="ltr">08:00&#8211;09:00</span></div><div class="free" style="top:360.0px;height:240.0px"><span dir="ltr">17:00&#8211;23:00</span></div><div class="blk itay lane-itay" title="איתי — אבן קיסר · 09:00-17:00" style="top:40.0px;height:320.0px"><b>איתי — אבן קיסר</b><i dir="ltr">09:00&#8211;17:00</i></div><div class="blk mori lane-mori" title="מורי — עבודה · 09:00-15:00" style="top:40.0px;height:240.0px"><b>מורי — עבודה</b><i dir="ltr">09:00&#8211;15:00</i></div><div class="blk meeting lane-mori mini" title="דביר / Flash · 15:00-15:30" style="top:280.0px;height:27.0px"><b>דביר / Flash</b></div>
-  </div>
-</div><div class="day">
-  <div class="dhead"><span class="dname">שני</span><span class="ddate">17.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free tiny" style="top:0.0px;height:40.0px"><span dir="ltr">08:00&#8211;09:00</span></div><div class="free" style="top:440.0px;height:160.0px"><span dir="ltr">19:00&#8211;23:00</span></div><div class="blk mori lane-mori" title="מורי — משרד · 09:00-19:00" style="top:40.0px;height:400.0px"><b>מורי — משרד</b><i dir="ltr">09:00&#8211;19:00</i></div><div class="blk meeting lane-mori mini" title="מאיה רובין / Flash · 15:00-15:30" style="top:280.0px;height:27.0px"><b>מאיה רובין / Flash</b></div><div class="blk meeting lane-mori mini" title="אלון פינקלשטיין / Flash · 16:30-17:00" style="top:340.0px;height:27.0px"><b>אלון פינקלשטיין / Flash</b></div><div class="flexnote">מורי מסיים במשרד בין 18:00 ל‑19:00</div>
-  </div>
-</div><div class="day">
-  <div class="dhead"><span class="dname">שלישי</span><span class="ddate">18.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free tiny" style="top:0.0px;height:40.0px"><span dir="ltr">08:00&#8211;09:00</span></div><div class="free" style="top:440.0px;height:160.0px"><span dir="ltr">19:00&#8211;23:00</span></div><div class="blk itay lane-itay" title="איתי — אבן קיסר · 09:00-17:00" style="top:40.0px;height:320.0px"><b>איתי — אבן קיסר</b><i dir="ltr">09:00&#8211;17:00</i></div><div class="blk mori lane-mori" title="מורי — משרד · 09:00-19:00" style="top:40.0px;height:400.0px"><b>מורי — משרד</b><i dir="ltr">09:00&#8211;19:00</i></div><div class="flexnote">מורי מסיים במשרד בין 18:00 ל‑19:00</div>
-  </div>
-</div><div class="day">
-  <div class="dhead"><span class="dname">רביעי</span><span class="ddate">19.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free tiny" style="top:0.0px;height:40.0px"><span dir="ltr">08:00&#8211;09:00</span></div><div class="free" style="top:360.0px;height:240.0px"><span dir="ltr">17:00&#8211;23:00</span></div><div class="blk itay lane-itay" title="איתי — אבן קיסר · 09:00-17:00" style="top:40.0px;height:320.0px"><b>איתי — אבן קיסר</b><i dir="ltr">09:00&#8211;17:00</i></div><div class="flexnote">מורי פנוי — רק איתי עסוק</div>
-  </div>
-</div><div class="day">
-  <div class="dhead"><span class="dname">חמישי</span><span class="ddate">20.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free" style="top:0.0px;height:180.0px"><span dir="ltr">08:00&#8211;12:30</span></div><div class="free" style="top:200.0px;height:140.0px"><span dir="ltr">13:00&#8211;16:30</span></div><div class="free" style="top:360.0px;height:240.0px"><span dir="ltr">17:00&#8211;23:00</span></div><div class="blk meeting lane-mori mini" title="לישי כהן / Flash · 12:30-13:00" style="top:180.0px;height:27.0px"><b>לישי כהן / Flash</b></div><div class="blk meeting lane-mori mini" title="ג'ונתן / Flash · 16:30-17:00" style="top:340.0px;height:27.0px"><b>ג'ונתן / Flash</b></div>
-  </div>
-</div><div class="day weekend">
-  <div class="dhead"><span class="dname">שישי</span><span class="ddate">21.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free" style="top:0.0px;height:600.0px"><span dir="ltr">08:00&#8211;23:00</span></div><div class="flexnote">שישי — שניהם פנויים</div>
-  </div>
-</div><div class="day weekend">
-  <div class="dhead"><span class="dname">שבת</span><span class="ddate">22.8</span></div>
-  <div class="track" style="height:600px">
-    <div class="hline" style="top:0.0px"></div><div class="hline" style="top:40.0px"></div><div class="hline" style="top:80.0px"></div><div class="hline" style="top:120.0px"></div><div class="hline" style="top:160.0px"></div><div class="hline" style="top:200.0px"></div><div class="hline" style="top:240.0px"></div><div class="hline" style="top:280.0px"></div><div class="hline" style="top:320.0px"></div><div class="hline" style="top:360.0px"></div><div class="hline" style="top:400.0px"></div><div class="hline" style="top:440.0px"></div><div class="hline" style="top:480.0px"></div><div class="hline" style="top:520.0px"></div><div class="hline" style="top:560.0px"></div><div class="hline" style="top:600.0px"></div><div class="free" style="top:0.0px;height:600.0px"><span dir="ltr">08:00&#8211;23:00</span></div><div class="flexnote">שבת — שניהם פנויים</div>
-  </div>
-</div>
+  <div class="days" id="days"></div>
 </div>
 <footer>
-  <span class="best">חלונות הזהב לתיאום: <em>ה׳ כמעט כל היום</em> · <em>א׳ · ד׳ מ‑<span dir="ltr">17:00</span></em> · <em>ב׳ · ג׳ מ‑<span dir="ltr">19:00</span></em> · <em>ו׳ · ש׳ פתוח</em></span>
-  <span>מורי עסוק ראשון · שני · שלישי בלבד · איתי באבן קיסר ראשון · שלישי · רביעי</span>
+  <span class="best" id="footerBest"></span>
+  <span id="footerSummary"></span>
 </footer>
 </div>
 </div></div>
-<main id="mob"><div class="sub2">שבוע <span dir="ltr">16&#8211;22</span> באוגוסט 2026 · שעון ישראל</div>
+<main id="mob">
+<div class="sub2" id="sub2Text"></div>
 <div class="key">
   <span><i style="background:var(--itay-bg);border:1.5px solid var(--itay)"></i>איתי</span>
   <span><i style="background:var(--mori-bg);border:1.5px solid var(--mori)"></i>מורי</span>
   <span><i style="background:var(--meet-bg)"></i>פגישות Flash</span>
   <span><i style="background:var(--free-bg);border:1.5px solid var(--free)"></i>פנוי לשניהם</span>
-</div><section class="card"><h3><span>ראשון</span><small>16.8</small><em>8 שעות תפוסות</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;09:00</span><span class="n">פנוי לשניהם</span></li><li class="r w-itay"><span class="t" dir="ltr">09:00&#8211;17:00</span><span class="n">איתי — אבן קיסר</span></li><li class="r w-mori"><span class="t" dir="ltr">09:00&#8211;15:00</span><span class="n">מורי — עבודה</span></li><li class="r w-meeting"><span class="t" dir="ltr">15:00&#8211;15:30</span><span class="n">דביר / Flash</span></li><li class="r w-free"><span class="t" dir="ltr">17:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card"><h3><span>שני</span><small>17.8</small><em>10 שעות תפוסות</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;09:00</span><span class="n">פנוי לשניהם</span></li><li class="r w-mori"><span class="t" dir="ltr">09:00&#8211;19:00</span><span class="n">מורי — משרד</span></li><li class="r w-meeting"><span class="t" dir="ltr">15:00&#8211;15:30</span><span class="n">מאיה רובין / Flash</span></li><li class="r w-meeting"><span class="t" dir="ltr">16:30&#8211;17:00</span><span class="n">אלון פינקלשטיין / Flash</span></li><li class="r w-free"><span class="t" dir="ltr">19:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card"><h3><span>שלישי</span><small>18.8</small><em>10 שעות תפוסות</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;09:00</span><span class="n">פנוי לשניהם</span></li><li class="r w-itay"><span class="t" dir="ltr">09:00&#8211;17:00</span><span class="n">איתי — אבן קיסר</span></li><li class="r w-mori"><span class="t" dir="ltr">09:00&#8211;19:00</span><span class="n">מורי — משרד</span></li><li class="r w-free"><span class="t" dir="ltr">19:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card"><h3><span>רביעי</span><small>19.8</small><em>8 שעות תפוסות</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;09:00</span><span class="n">פנוי לשניהם</span></li><li class="r w-itay"><span class="t" dir="ltr">09:00&#8211;17:00</span><span class="n">איתי — אבן קיסר</span></li><li class="r w-free"><span class="t" dir="ltr">17:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card"><h3><span>חמישי</span><small>20.8</small><em>1 שעות תפוסות</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;12:30</span><span class="n">פנוי לשניהם</span></li><li class="r w-meeting"><span class="t" dir="ltr">12:30&#8211;13:00</span><span class="n">לישי כהן / Flash</span></li><li class="r w-free"><span class="t" dir="ltr">13:00&#8211;16:30</span><span class="n">פנוי לשניהם</span></li><li class="r w-meeting"><span class="t" dir="ltr">16:30&#8211;17:00</span><span class="n">ג'ונתן / Flash</span></li><li class="r w-free"><span class="t" dir="ltr">17:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card wk"><h3><span>שישי</span><small>21.8</small><em>פנוי לגמרי</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section><section class="card wk"><h3><span>שבת</span><small>22.8</small><em>פנוי לגמרי</em></h3><ul><li class="r w-free"><span class="t" dir="ltr">08:00&#8211;23:00</span><span class="n">פנוי לשניהם</span></li></ul></section></main>
+</div>
+<div id="mobDays"></div>
+</main>
+
+<div class="ov" id="addOverlay" hidden>
+  <div class="ovbox">
+    <h4>הוספת זמן</h4>
+    <label>יום
+      <select id="addDay"></select>
+    </label>
+    <label>סוג
+      <select id="addType">
+        <option value="itay">איתי</option>
+        <option value="mori">מורי</option>
+        <option value="meeting">פגישה</option>
+      </select>
+    </label>
+    <div class="ovrow">
+      <label>משעה<input type="time" id="addStart" value="09:00"></label>
+      <label>עד שעה<input type="time" id="addEnd" value="10:00"></label>
+    </div>
+    <label>תיאור
+      <input type="text" id="addLabel" placeholder="לדוגמה: פגישה עם דביר">
+    </label>
+    <div class="ovbtns">
+      <button type="button" id="addCancel">ביטול</button>
+      <button type="button" id="addSave" class="primary">שמירה</button>
+    </div>
+  </div>
+</div>
+
 <script>
+(function(){
+'use strict';
+
+var DOW = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+var DOW_SHORT = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
+var HE_MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+var WORK_START = 8*60, WORK_END = 23*60;
+var BASE_WEEK_START = '2026-08-16';
+
+var BASE_BUSY = {
+  0: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'},
+       {type:'mori', start:'09:00', end:'15:00', label:'מורי — עבודה'},
+       {type:'meeting', start:'15:00', end:'15:30', label:'דביר / Flash'} ],
+  1: [ {type:'mori', start:'09:00', end:'19:00', label:'מורי — משרד'},
+       {type:'meeting', start:'15:00', end:'15:30', label:'מאיה רובין / Flash'},
+       {type:'meeting', start:'16:30', end:'17:00', label:'אלון פינקלשטיין / Flash'} ],
+  2: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'},
+       {type:'mori', start:'09:00', end:'19:00', label:'מורי — משרד'} ],
+  3: [ {type:'itay', start:'09:00', end:'17:00', label:'איתי — אבן קיסר'} ],
+  4: [ {type:'meeting', start:'12:30', end:'13:00', label:'לישי כהן / Flash'},
+       {type:'meeting', start:'16:30', end:'17:00', label:"ג'ונתן / Flash"} ],
+  5: [],
+  6: []
+};
+var BASE_NOTES = {
+  1: 'מורי מסיים במשרד בין 18:00 ל‑19:00',
+  2: 'מורי מסיים במשרד בין 18:00 ל‑19:00',
+  3: 'מורי פנוי — רק איתי עסוק',
+  5: 'שישי — שניהם פנויים',
+  6: 'שבת — שניהם פנויים'
+};
+
+var addedEvents = loadJSON('cf.events.v1', {});
+var removedBase = loadJSON('cf.removed.v1', {});
+var weekStart = parseISO(loadJSON('cf.viewWeek', BASE_WEEK_START) || BASE_WEEK_START);
+if(isNaN(weekStart.getTime())) weekStart = parseISO(BASE_WEEK_START);
+
+function loadJSON(key, fallback){
+  try{ var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch(e){ return fallback; }
+}
+function saveJSON(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+function parseISO(iso){ var p = iso.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); }
+function toISO(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function addDays(d,n){ var r = new Date(d); r.setDate(r.getDate()+n); return r; }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function t2m(t){ var p = t.split(':').map(Number); return p[0]*60+p[1]; }
+function m2t(m){ m = Math.max(0, Math.round(m)); var h = Math.floor(m/60), mm = m%60; return String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0'); }
+function clampMin(m){ return Math.min(WORK_END, Math.max(WORK_START, m)); }
+function px(min){ return Math.round(min*40/60*100)/100; }
+
+function getDayBusy(weekISO, dayIdx){
+  var list = [];
+  if(weekISO === BASE_WEEK_START){
+    var base = BASE_BUSY[dayIdx] || [];
+    var removedIdx = (removedBase[weekISO] && removedBase[weekISO][dayIdx]) || [];
+    base.forEach(function(b,i){ if(removedIdx.indexOf(i) === -1) list.push(Object.assign({}, b, {baseIndex:i})); });
+  }
+  var added = (addedEvents[weekISO] && addedEvents[weekISO][dayIdx]) || [];
+  added.forEach(function(a){ list.push(a); });
+  return list;
+}
+function addEvent(weekISO, dayIdx, ev){
+  if(!addedEvents[weekISO]) addedEvents[weekISO] = {};
+  if(!addedEvents[weekISO][dayIdx]) addedEvents[weekISO][dayIdx] = [];
+  ev.id = 'e' + Date.now() + Math.random().toString(36).slice(2,7);
+  addedEvents[weekISO][dayIdx].push(ev);
+  saveJSON('cf.events.v1', addedEvents);
+}
+function removeEvent(weekISO, dayIdx, item){
+  if(item.baseIndex !== undefined){
+    if(!removedBase[weekISO]) removedBase[weekISO] = {};
+    if(!removedBase[weekISO][dayIdx]) removedBase[weekISO][dayIdx] = [];
+    removedBase[weekISO][dayIdx].push(item.baseIndex);
+    saveJSON('cf.removed.v1', removedBase);
+  } else if(item.id){
+    var arr = (addedEvents[weekISO] && addedEvents[weekISO][dayIdx]) || [];
+    var idx = arr.findIndex(function(x){ return x.id === item.id; });
+    if(idx > -1){ arr.splice(idx,1); saveJSON('cf.events.v1', addedEvents); }
+  }
+}
+function freeWindows(busy){
+  var ivs = busy.map(function(b){ return [clampMin(t2m(b.start)), clampMin(t2m(b.end))]; }).filter(function(iv){ return iv[1] > iv[0]; });
+  ivs.sort(function(a,b){ return a[0]-b[0]; });
+  var merged = [];
+  ivs.forEach(function(iv){
+    if(merged.length && iv[0] <= merged[merged.length-1][1]) merged[merged.length-1][1] = Math.max(merged[merged.length-1][1], iv[1]);
+    else merged.push(iv.slice());
+  });
+  var free = [], cur = WORK_START;
+  merged.forEach(function(iv){
+    if(iv[0] > cur) free.push([cur, iv[0]]);
+    cur = Math.max(cur, iv[1]);
+  });
+  if(cur < WORK_END) free.push([cur, WORK_END]);
+  return free;
+}
+
+function formatRangeHebrew(ws){
+  var end = addDays(ws,6);
+  var y1=ws.getFullYear(), y2=end.getFullYear(), m1=ws.getMonth(), m2=end.getMonth(), d1=ws.getDate(), d2=end.getDate();
+  if(m1===m2 && y1===y2) return 'שבוע <span dir="ltr">'+d1+'&#8211;'+d2+'</span> ב'+HE_MONTHS[m1]+' '+y1;
+  if(y1===y2) return 'שבוע <span dir="ltr">'+d1+'.'+(m1+1)+'&#8211;'+d2+'.'+(m2+1)+'</span> '+y1;
+  return 'שבוע <span dir="ltr">'+d1+'.'+(m1+1)+'.'+y1+'&#8211;'+d2+'.'+(m2+1)+'.'+y2+'</span>';
+}
+function formatStamp(ws){
+  var end = addDays(ws,6);
+  if(ws.getMonth()===end.getMonth() && ws.getFullYear()===end.getFullYear())
+    return ws.getDate()+'&#8211;'+end.getDate()+'.'+(end.getMonth()+1)+'.'+end.getFullYear();
+  return ws.getDate()+'.'+(ws.getMonth()+1)+'&#8211;'+end.getDate()+'.'+(end.getMonth()+1)+'.'+end.getFullYear();
+}
+function formatShort(ws){
+  var end = addDays(ws,6);
+  return ws.getDate()+'.'+(ws.getMonth()+1)+'–'+end.getDate()+'.'+(end.getMonth()+1);
+}
+
+function renderDesktopDay(dayIdx, date, weekISO){
+  var busy = getDayBusy(weekISO, dayIdx);
+  var free = freeWindows(busy);
+  var weekend = dayIdx >= 5;
+  var html = '<div class="day'+(weekend?' weekend':'')+'">';
+  html += '<div class="dhead"><span class="dname">'+DOW[dayIdx]+'</span><span class="ddate">'+date.getDate()+'.'+(date.getMonth()+1)+'</span>'
+        + '<button type="button" class="addbtn" data-day="'+dayIdx+'" title="הוספת זמן">+</button></div>';
+  html += '<div class="track" style="height:600px">';
+  for(var h = WORK_START; h <= WORK_END; h += 60){ html += '<div class="hline" style="top:'+px(h-WORK_START)+'px"></div>'; }
+  free.forEach(function(f){
+    var top = px(f[0]-WORK_START), height = px(f[1]-f[0]);
+    var tiny = (f[1]-f[0]) <= 75 ? ' tiny' : '';
+    html += '<div class="free'+tiny+'" style="top:'+top+'px;height:'+height+'px"><span dir="ltr">'+m2t(f[0])+'&#8211;'+m2t(f[1])+'</span></div>';
+  });
+  busy.forEach(function(b){
+    var s = clampMin(t2m(b.start)), e = clampMin(t2m(b.end));
+    if(e <= s) return;
+    var top = px(s-WORK_START), height = px(e-s);
+    var lane = b.type === 'itay' ? 'lane-itay' : 'lane-mori';
+    var sizeClass = height < 34 ? ' mini' : (height < 50 ? ' tiny' : '');
+    var idAttr = b.baseIndex !== undefined ? ' data-base="'+b.baseIndex+'"' : ' data-id="'+b.id+'"';
+    html += '<div class="blk '+b.type+' '+lane+sizeClass+'" data-day="'+dayIdx+'"'+idAttr+' title="'+esc(b.label+' · '+b.start+'-'+b.end)+'" style="top:'+top+'px;height:'+height+'px"><b>'+esc(b.label)+'</b>'
+      + (sizeClass.indexOf('mini') > -1 ? '' : '<i dir="ltr">'+b.start+'&#8211;'+b.end+'</i>') + '</div>';
+  });
+  var note = weekISO === BASE_WEEK_START ? BASE_NOTES[dayIdx] : null;
+  if(note) html += '<div class="flexnote">'+esc(note)+'</div>';
+  html += '</div></div>';
+  return html;
+}
+
+function renderMobileDay(dayIdx, date, weekISO){
+  var busy = getDayBusy(weekISO, dayIdx).slice().sort(function(a,b){ return t2m(a.start)-t2m(b.start); });
+  var free = freeWindows(busy);
+  var items = busy.map(function(b){ return {t:t2m(b.start), cls:'w-'+b.type, label:b.label, start:b.start, endStr:b.end, kind:b.type, ref:b}; })
+    .concat(free.map(function(f){ return {t:f[0], cls:'w-free', label:'פנוי לשניהם', start:m2t(f[0]), endStr:m2t(f[1]), kind:'free'}; }))
+    .sort(function(a,b){ return a.t-b.t; });
+  var freeMinutes = free.reduce(function(sum,f){ return sum + (f[1]-f[0]); }, 0);
+  var busyMinutes = (WORK_END-WORK_START) - freeMinutes;
+  var badge = busyMinutes === 0 ? 'פנוי לגמרי' : Math.round(busyMinutes/60) + ' שעות תפוסות';
+  var weekend = dayIdx >= 5;
+  var html = '<section class="card'+(weekend?' wk':'')+'"><h3><span>'+DOW[dayIdx]+'</span><small>'+date.getDate()+'.'+(date.getMonth()+1)+'</small><em>'+badge+'</em>'
+    + '<button type="button" class="addbtn2" data-day="'+dayIdx+'" title="הוספת זמן">+</button></h3><ul>';
+  items.forEach(function(it){
+    var delBtn = '';
+    if(it.kind !== 'free'){
+      var idAttr = it.ref.baseIndex !== undefined ? ' data-base="'+it.ref.baseIndex+'"' : ' data-id="'+it.ref.id+'"';
+      delBtn = '<button type="button" class="delbtn" data-day="'+dayIdx+'"'+idAttr+' title="מחיקה">×</button>';
+    }
+    html += '<li class="r '+it.cls+'"><span class="t" dir="ltr">'+it.start+'&#8211;'+it.endStr+'</span><span class="n">'+esc(it.label)+'</span>'+delBtn+'</li>';
+  });
+  html += '</ul></section>';
+  return html;
+}
+
+function renderFooter(days){
+  var bestParts = days.map(function(d){
+    var totalFree = d.free.reduce(function(s,f){ return s+(f[1]-f[0]); }, 0);
+    if(!d.free.length) return null;
+    if(totalFree >= WORK_END-WORK_START) return DOW_SHORT[d.dayIdx]+' פתוח כל היום';
+    if(totalFree >= 480) return DOW_SHORT[d.dayIdx]+' כמעט כל היום';
+    var longest = d.free.reduce(function(a,b){ return (b[1]-b[0]) > (a[1]-a[0]) ? b : a; });
+    if(longest[1] === WORK_END) return DOW_SHORT[d.dayIdx]+' מ‑<span dir="ltr">'+m2t(longest[0])+'</span>';
+    return DOW_SHORT[d.dayIdx]+' <span dir="ltr">'+m2t(longest[0])+'&#8211;'+m2t(longest[1])+'</span>';
+  }).filter(Boolean);
+  var bestHtml = bestParts.length ? bestParts.join(' · ') : 'אין חלונות פנויים השבוע';
+
+  var itayDays = [], moriDays = [];
+  days.forEach(function(d){
+    if(d.busy.some(function(b){ return b.type === 'itay'; })) itayDays.push(DOW_SHORT[d.dayIdx]);
+    if(d.busy.some(function(b){ return b.type === 'mori'; })) moriDays.push(DOW_SHORT[d.dayIdx]);
+  });
+  var summaryParts = [];
+  if(itayDays.length) summaryParts.push('איתי עסוק '+itayDays.join('·'));
+  if(moriDays.length) summaryParts.push('מורי עסוק '+moriDays.join('·'));
+  var summaryText = summaryParts.length ? summaryParts.join(' · ') : 'לא נוספו זמנים לשבוע הזה עדיין';
+
+  document.getElementById('footerBest').innerHTML = 'חלונות הזהב לתיאום: '+bestHtml;
+  document.getElementById('footerSummary').textContent = summaryText;
+}
+
+function renderWeek(){
+  var weekISO = toISO(weekStart);
+  document.getElementById('subText').innerHTML = formatRangeHebrew(weekStart)+' · שעון ישראל (GMT+3)';
+  document.getElementById('sub2Text').innerHTML = formatRangeHebrew(weekStart)+' · שעון ישראל';
+  document.getElementById('stampText').innerHTML = 'שבוע <span dir="ltr">'+formatStamp(weekStart)+'</span> · שעון ישראל';
+  document.getElementById('weekRangeLabel').textContent = formatShort(weekStart);
+
+  var daysData = [], deskHtml = '', mobHtml = '';
+  for(var i = 0; i < 7; i++){
+    var date = addDays(weekStart, i);
+    var busy = getDayBusy(weekISO, i);
+    var free = freeWindows(busy);
+    daysData.push({dayIdx:i, busy:busy, free:free});
+    deskHtml += renderDesktopDay(i, date, weekISO);
+    mobHtml += renderMobileDay(i, date, weekISO);
+  }
+  document.getElementById('days').innerHTML = deskHtml;
+  document.getElementById('mobDays').innerHTML = mobHtml;
+  renderFooter(daysData);
+
+  var isBase = weekISO === BASE_WEEK_START;
+  document.getElementById('icsLink').style.display = isBase ? '' : 'none';
+  document.getElementById('pdfLink').style.display = isBase ? '' : 'none';
+
+  saveJSON('cf.viewWeek', weekISO);
+  attachDayInteractions();
+}
+
+function attachDayInteractions(){
+  document.querySelectorAll('.addbtn,.addbtn2').forEach(function(btn){
+    btn.addEventListener('click', function(e){ e.stopPropagation(); openAdd(+btn.dataset.day); });
+  });
+  document.querySelectorAll('.blk[data-day]').forEach(function(el){
+    el.addEventListener('click', function(){
+      var day = +el.dataset.day;
+      var labelEl = el.querySelector('b');
+      var label = labelEl ? labelEl.textContent : 'האירוע';
+      if(!confirm('למחוק את “'+label+'”?')) return;
+      var item = el.hasAttribute('data-base') ? {baseIndex:+el.dataset.base} : {id: el.dataset.id};
+      removeEvent(toISO(weekStart), day, item);
+      renderWeek();
+    });
+  });
+  document.querySelectorAll('.delbtn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var day = +btn.dataset.day;
+      var row = btn.closest('.r');
+      var label = row ? row.querySelector('.n').textContent : 'האירוע';
+      if(!confirm('למחוק את “'+label+'”?')) return;
+      var item = btn.hasAttribute('data-base') ? {baseIndex:+btn.dataset.base} : {id: btn.dataset.id};
+      removeEvent(toISO(weekStart), day, item);
+      renderWeek();
+    });
+  });
+}
+
+var addOverlay = document.getElementById('addOverlay');
+function openAdd(dayIdx){
+  var sel = document.getElementById('addDay');
+  sel.innerHTML = '';
+  for(var i = 0; i < 7; i++){
+    var date = addDays(weekStart, i);
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = DOW[i]+' ('+date.getDate()+'.'+(date.getMonth()+1)+')';
+    if(i === dayIdx) opt.selected = true;
+    sel.appendChild(opt);
+  }
+  document.getElementById('addLabel').value = '';
+  document.getElementById('addStart').value = '09:00';
+  document.getElementById('addEnd').value = '10:00';
+  document.getElementById('addType').value = 'itay';
+  addOverlay.hidden = false;
+}
+function closeAdd(){ addOverlay.hidden = true; }
+document.getElementById('addCancel').addEventListener('click', closeAdd);
+addOverlay.addEventListener('click', function(e){ if(e.target === addOverlay) closeAdd(); });
+document.getElementById('addSave').addEventListener('click', function(){
+  var day = +document.getElementById('addDay').value;
+  var type = document.getElementById('addType').value;
+  var start = document.getElementById('addStart').value;
+  var end = document.getElementById('addEnd').value;
+  var label = document.getElementById('addLabel').value.trim();
+  if(!start || !end || t2m(end) <= t2m(start)){ alert('טווח השעות לא תקין'); return; }
+  if(!label) label = type === 'itay' ? 'איתי' : (type === 'mori' ? 'מורי' : 'פגישה');
+  addEvent(toISO(weekStart), day, {type:type, start:start, end:end, label:label});
+  closeAdd();
+  renderWeek();
+});
+
+document.getElementById('prevWeek').addEventListener('click', function(){ weekStart = addDays(weekStart, -7); renderWeek(); });
+document.getElementById('nextWeek').addEventListener('click', function(){ weekStart = addDays(weekStart, 7); renderWeek(); });
+document.getElementById('todayWeek').addEventListener('click', function(){ weekStart = parseISO(BASE_WEEK_START); renderWeek(); });
+
 document.querySelectorAll('.ctl input').forEach(function(cb){
   cb.addEventListener('change', function(){
     document.querySelector('.page').classList.toggle('h-' + cb.dataset.k, !cb.checked);
   });
 });
 
+renderWeek();
+})();
 </script>
 </body></html>
